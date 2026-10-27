@@ -1,0 +1,50 @@
+import matplotlib.pyplot as plt
+import numpy as np
+import cv2 as cv
+
+def Image_Results():
+    Images = np.load('ori.npy', allow_pickle=True)
+    GT = np.load('GT.npy', allow_pickle=True)
+    Unet = np.load('UNet.npy', allow_pickle=True)
+    Resunet = np.load('ResiUNet.npy', allow_pickle=True)
+    icnn = np.load('ICNN.npy', allow_pickle=True)
+    lab = np.load('LabV3p.npy', allow_pickle=True)
+    PROPOSED = np.load('Seg_Images.npy', allow_pickle=True)
+    for i in range(5):
+        plt.suptitle("Image %d" % ((i + 1)), fontsize=20)
+        plt.subplot(2, 4, 1)
+        plt.title('Original')
+        plt.imshow(Images[i])
+        plt.subplot(2, 4, 2)
+        plt.title('GroundTruth')
+        plt.imshow(GT[i])
+        plt.subplot(2, 4, 3)
+        plt.title('UNet')
+        plt.imshow(Unet[i])
+        plt.subplot(2, 4, 4)
+        plt.title('ResiUNet')
+        plt.imshow(Resunet[i])
+        plt.subplot(2, 4, 5)
+        plt.title('ICNN')
+        plt.imshow(icnn[i])
+        plt.subplot(2, 4, 6)
+        plt.title('LabV3p')
+        plt.imshow(lab[i])
+        plt.subplot(2, 4, 7)
+        plt.title('PROPOSED')
+        plt.imshow(PROPOSED[i])
+        plt.tight_layout()
+        plt.show(block=False)
+        plt.pause(2)
+        plt.close()
+        # cv.imwrite('./Results/Image_Results/orig-' + str(i + 1) + '.png', Images[i])
+        # cv.imwrite('./Results/Image_Results/gt-' + str(i + 1) + '.png', GT[i])
+        # cv.imwrite('./Results/Image_Results/UNet-' + str(i + 1) + '.png', Unet[i])
+        # cv.imwrite('./Results/Image_Results/ResiUNet-' + str(i + 1) + '.png', Resunet[i])
+        # cv.imwrite('./Results/Image_Results/ICNN-' + str(i + 1) + '.png', icnn[i])
+        # cv.imwrite('./Results/Image_Results/LabV3p-' + str(i + 1) + '.png', lab[i])
+        # cv.imwrite('./Results/Image_Results/PROPOSED-' + str(i + 1) + '.png', PROPOSED[i])
+
+
+if __name__ == '__main__':
+    Image_Results()
